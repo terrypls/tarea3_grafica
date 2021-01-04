@@ -15,13 +15,18 @@ class Poblacion(object):
         self.dias_recuperacion = data["Days_to_heal"]
         self.poblacion = []
         self.estadisticas = []
-        self.poblacion_actual = self.poblacion_inicial
+
+    def getPoblacion(self):
+        return self.poblacion_inicial
 
     def getEstadisticas(self):
         return self.estadisticas
 
     def setNewRadio(self, radio):
         self.radio = radio
+
+    def getIndividuos(self):
+        return self.poblacion
 
     def crearIndividuos(self):
         for i in range(self.poblacion_inicial - 1):
@@ -63,3 +68,9 @@ class Poblacion(object):
             print("ERRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOOR " + str(total))
         else:
             self.estadisticas.append([enfermos, vivos, muertos])
+
+    def iteracion(self):
+        self.cadenaDeContagios()
+        self.recuperados()
+        self.crearEstadistica()
+        

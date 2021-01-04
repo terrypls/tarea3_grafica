@@ -10,7 +10,7 @@ def main():
         poblacion.recuperados()
         poblacion.crearEstadistica()
     print(poblacion.getEstadisticas())
-    grafico = Grafico(1000)
+    grafico = Grafico(poblacion.getPoblacion)
     grafico.graficar(poblacion.getEstadisticas())
 
 if __name__ == "__main__":

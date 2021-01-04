@@ -4,9 +4,17 @@ from OpenGL.GL import *
 import sys
 from math import pi
 
-
+from poblacion import Poblacion
 from modelos.persona import Persona
 from librerias import easy_shaders as es
+from controlador import Controlador
+
+
+def crearPersonas(poblacion):
+    poblacion.crearIndividuos()
+    return poblacion.getIndividuos()
+
+
 
 
 def Simulador():
@@ -24,16 +32,14 @@ def Simulador():
         sys.exit()
 
     glfw.make_context_current(window)
-    #controlador = Controlador()
+    controlador = Controlador()
 
     # Connecting the callback function 'on_key' to handle keyboard events
-    #glfw.set_key_callback(window, controlador.on_key)
+    glfw.set_key_callback(window, controlador.on_key)
 
     # Assembling the shader program (pipeline) with both shaders
     pipeline = es.SimpleTransformShaderProgram()
     pipeline_texturas = es.SimpleTextureTransformShaderProgram()
-
-    # Telling OpenGL to use our shader program
 
     # Setting up the clear screen color
     glClearColor(245/255, 222/255, 179/255, 1.0)
@@ -45,12 +51,17 @@ def Simulador():
     #magia para que no se vea negro el png
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    
+
+    poblacion_modelo = Poblacion()
+    individuos = crearPersonas(poblacion_modelo)    
     # HACEMOS LOS OBJETOS
+    #for i in range(len(poblacion_modelo)):
+
     persona = Persona(0.2, 0.3)
     persona2 = Persona(-0.4,-0.5)
 
     t0 = 0
+    terry = True
     #controlador.setSerpiente(serpiente)
     #print(serpiente.getPosicion())
     while not glfw.window_should_close(window):  # Dibujando --> 1. obtener el input
@@ -65,8 +76,8 @@ def Simulador():
         # DIBUJAR LOS MODELOS
         
         glUseProgram(pipeline.shaderProgram)
-        persona.draw(pipeline)
-        persona2.draw(pipeline)
+        persona.draw(pipeline,terry)
+        persona2.draw(pipeline,not terry)
         #borde.draw(pipeline)
         #serpiente.comerManzana()
         #manzana.draw(pipeline)
@@ -78,12 +89,13 @@ def Simulador():
 
         # Calculamos el dt
         ti = glfw.get_time()
-        margen = 0.35
+        margen = 1
         
         dt = ti - t0
 
 
         if dt > margen:
+            terry = not terry
             t0 = glfw.get_time()
         #    serpiente.movimientoPerpetuo()
         #if controlador.hayChoque():
