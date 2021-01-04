@@ -6,6 +6,9 @@ class Controlador(object):
 
     def setModelo(self, modelo):
         self.modelacion = modelo
+    
+    def setDibujos(self, dibujos):
+        self.dibujo = dibujos
         
     def on_key(self, window, key, scancode, action, mods):
         if not (action == glfw.PRESS or action == glfw.RELEASE):
@@ -21,4 +24,7 @@ class Controlador(object):
         
         elif (key == glfw.KEY_RIGHT) and action == glfw.PRESS:
             self.modelacion.iteracion()
+            print("guardadas las estadisticas")
+            for individuo in self.dibujo:
+                individuo[0].mover(individuo[1].getPosicionX(),individuo[1].getPosicionY())
             print("Avanzo")

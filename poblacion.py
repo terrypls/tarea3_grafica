@@ -73,4 +73,6 @@ class Poblacion(object):
         self.cadenaDeContagios()
         self.recuperados()
         self.crearEstadistica()
+        print(self.getEstadisticas())
+
         

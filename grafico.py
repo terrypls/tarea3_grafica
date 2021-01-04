@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 
 
 class Grafico(object):
-    def __init__(self, poblacion):
-        self.poblacion = poblacion
+    def __init__(self):
+
 
     def graficar(self, datos):
         largo_x = [x for x in range(len(datos))]
@@ -14,10 +14,6 @@ class Grafico(object):
             enfermos.append(data[0])
             vivos.append(data[1])
             muertos.append(data[2])
-
-        print((vivos))
-        print(muertos)
-        print(enfermos)
 
         fig, ax = plt.subplots()
         ax.plot(largo_x, enfermos, label="enfermos")

@@ -8,6 +8,7 @@ class Persona(object):
     def __init__(self, x, y):
         self.pos_x = x
         self.pos_y = y
+        self.model = None
                 
         gpu_sano = es.toGPUShape(bs.createColorQuad(0, 1, 0))
         gpu_enfermo = es.toGPUShape(bs.createColorQuad(1, 0, 0))
@@ -32,8 +33,16 @@ class Persona(object):
         self.sano = sanoPos
         self.enfermo = enfermoPos 
 
-    def draw(self, pipeline, sano):
-        if sano:
-            sg.drawSceneGraphNode(self.sano, pipeline, "transform")
-        else:
+    def draw(self, pipeline, enfermo):
+        if enfermo:
+            self.model = self.enfermo
             sg.drawSceneGraphNode(self.enfermo, pipeline, "transform")
+        else:
+            self.model= self.sano
+            sg.drawSceneGraphNode(self.sano, pipeline, "transform")
+
+    def mover(self, posX, posY):
+        self.pos_x = posX
+        self.pos_y = posY
+        self.model.transform =tr.translate(self.pos_x,self.pos_y,0)
+

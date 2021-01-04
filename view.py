@@ -14,8 +14,12 @@ def crearPersonas(poblacion):
     poblacion.crearIndividuos()
     return poblacion.getIndividuos()
 
-
-
+def crearObjetosDibujo(individuo):
+    dibujitos = []
+    for ind in individuo:
+        aux = [Persona(ind.getPosicionX(), ind.getPosicionY()),ind]
+        dibujitos.append(aux)
+    return dibujitos
 
 def Simulador():
     # Initialize glfw
@@ -53,17 +57,16 @@ def Simulador():
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     poblacion_modelo = Poblacion()
-    individuos = crearPersonas(poblacion_modelo)    
-    # HACEMOS LOS OBJETOS
-    #for i in range(len(poblacion_modelo)):
+    individuos = crearPersonas(poblacion_modelo)
 
-    persona = Persona(0.2, 0.3)
-    persona2 = Persona(-0.4,-0.5)
+    personitas = crearObjetosDibujo(individuos)
+    controlador.setModelo(poblacion_modelo)
+    controlador.setDibujos(personitas)
+
+    print(personitas[1][1].getPosicion())
 
     t0 = 0
-    terry = True
-    #controlador.setSerpiente(serpiente)
-    #print(serpiente.getPosicion())
+
     while not glfw.window_should_close(window):  # Dibujando --> 1. obtener el input
         # Using GLFW to check for input events
         glfw.poll_events()  # OBTIENE EL INPUT --> CONTROLADOR --> MODELOS
@@ -76,32 +79,18 @@ def Simulador():
         # DIBUJAR LOS MODELOS
         
         glUseProgram(pipeline.shaderProgram)
-        persona.draw(pipeline,terry)
-        persona2.draw(pipeline,not terry)
-        #borde.draw(pipeline)
-        #serpiente.comerManzana()
-        #manzana.draw(pipeline)
+        for dibujo in personitas:
+            if dibujo[1].isVivo():
+                dibujo[0].draw(pipeline,dibujo[1].isContagiado())
 
-        glUseProgram(pipeline_texturas.shaderProgram)
-        #serpiente.draw(pipeline_texturas)
-
-        
 
         # Calculamos el dt
         ti = glfw.get_time()
         margen = 1
-        
         dt = ti - t0
-
-
         if dt > margen:
-            terry = not terry
             t0 = glfw.get_time()
-        #    serpiente.movimientoPerpetuo()
-        #if controlador.hayChoque():
-         #   gameOver.draw(pipeline_texturas)
-          #  gameOver.rotar(ti * (pi / 8))
-           # print("ITS OVER SNAKE")
+
         # Once the render is done, buffers are swapped, showing only the complete scene.
         glfw.swap_buffers(window)
 
