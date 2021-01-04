@@ -4,8 +4,8 @@ from individuo import Individuo
 
 
 class Poblacion(object):
-    def __init__(self):
-        with open('virus.json') as json_file:
+    def __init__(self,nombre):
+        with open(nombre) as json_file:
             data = json.load(json_file)
         data = data[0]
         self.radio = data["Radius"]
@@ -95,4 +95,4 @@ class Poblacion(object):
         self.cadenaDeContagios()
         self.recuperados()
         self.crearEstadistica()
-        print(self.getEstadisticas())
+        print(self.getEstadisticas()[-1])

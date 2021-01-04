@@ -41,3 +41,6 @@ class Controlador(object):
             for individuo in self.dibujo:
                 individuo[0].mover(individuo[1].getPosicionX(), individuo[1].getPosicionY())
             print("Avanzo")
+
+        else:
+            return    

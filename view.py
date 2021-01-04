@@ -22,7 +22,7 @@ def crearObjetosDibujo(individuo):
     return dibujitos
 
 
-def Simulador():
+def Simulador(virus):
     # Initialize glfw
     if not glfw.init():
         sys.exit()
@@ -56,7 +56,7 @@ def Simulador():
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-    poblacion_modelo = Poblacion()
+    poblacion_modelo = Poblacion(virus)
     individuos = crearPersonas(poblacion_modelo)
 
     personitas = crearObjetosDibujo(individuos)
