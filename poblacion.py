@@ -51,8 +51,6 @@ class Poblacion(object):
         vivos = 0
         enfermos = 0
         for ind in self.poblacion:
-            algo = [ind.isContagiado(), ind.isVivo(), ind.isRecuperado()]
-            print(algo)
             if not ind.isVivo():
                 muertos += 1
             elif ind.isContagiado():
