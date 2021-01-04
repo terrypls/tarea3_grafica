@@ -33,7 +33,6 @@ class Poblacion(object):
         self.estadisticas.append([1, self.poblacion_inicial - 1, 0])  # enfermos, vivos, muertos
 
     def cadenaDeContagios(self):
-
         tupla = tuple(self.poblacion)
         for i in range((len(tupla))):
             if tupla[i].isContagiado():
@@ -57,6 +56,7 @@ class Poblacion(object):
                 enfermos += 1
             else:
                 vivos += 1
+            ind.cambiarPosicion()
         total = muertos + vivos + enfermos
 
         if total != len(self.poblacion):

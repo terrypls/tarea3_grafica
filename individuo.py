@@ -52,12 +52,22 @@ class Individuo(object):
     def getPosicionY(self):
         return self.pos_y
 
-    def cambiarPosicion(self, x, y):
-        pass
+    def cambiarPosicion(self):
+        pos_x = self.pos_x + round(random.uniform(-0.1, 0.1), 3)
+        pos_y = self.pos_y + round(random.uniform(-0.1, 0.1), 3)
+
+        pos_x = max(pos_x, -1)
+        pos_x = min(pos_x, 1)
+
+        pos_y = max(pos_y, -1)
+        pos_y = min(pos_y, 1)
+
+        self.pos_y = pos_y
+        self.pos_x = pos_x
 
     def interseccion(self, x, y, radio):
         distancia = math.sqrt((x - self.pos_x) ** 2 + (y - self.pos_y) ** 2)
-        if distancia <=radio:
+        if distancia <= radio:
             return True
         else:
             return False
