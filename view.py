@@ -1,4 +1,3 @@
-
 import glfw
 from OpenGL.GL import *
 import sys
@@ -14,12 +13,14 @@ def crearPersonas(poblacion):
     poblacion.crearIndividuos()
     return poblacion.getIndividuos()
 
+
 def crearObjetosDibujo(individuo):
     dibujitos = []
     for ind in individuo:
-        aux = [Persona(ind.getPosicionX(), ind.getPosicionY()),ind]
+        aux = [Persona(ind.getPosicionX(), ind.getPosicionY()), ind]
         dibujitos.append(aux)
     return dibujitos
+
 
 def Simulador():
     # Initialize glfw
@@ -46,13 +47,12 @@ def Simulador():
     pipeline_texturas = es.SimpleTextureTransformShaderProgram()
 
     # Setting up the clear screen color
-    glClearColor(245/255, 222/255, 179/255, 1.0)
+    glClearColor(245 / 255, 222 / 255, 179 / 255, 1.0)
 
     # Our shapes here are always fully painted
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
 
-
-    #magia para que no se vea negro el png
+    # magia para que no se vea negro el png
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
@@ -77,12 +77,11 @@ def Simulador():
         # Reconocer la logica
 
         # DIBUJAR LOS MODELOS
-        
+
         glUseProgram(pipeline.shaderProgram)
         for dibujo in personitas:
             if dibujo[1].isVivo():
-                dibujo[0].draw(pipeline,dibujo[1].isContagiado())
-
+                dibujo[0].draw(pipeline, dibujo[1].isContagiado())
 
         # Calculamos el dt
         ti = glfw.get_time()

@@ -13,5 +13,6 @@ def main():
     grafico = Grafico(poblacion.getPoblacion)
     grafico.graficar(poblacion.getEstadisticas())
 
+
 if __name__ == "__main__":
     main()

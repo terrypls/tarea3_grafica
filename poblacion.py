@@ -74,5 +74,3 @@ class Poblacion(object):
         self.recuperados()
         self.crearEstadistica()
         print(self.getEstadisticas())
-
-        

@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 class Grafico(object):
     def __init__(self):
 
-
     def graficar(self, datos):
         largo_x = [x for x in range(len(datos))]
         vivos = []
