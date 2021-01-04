@@ -47,7 +47,8 @@ def Simulador():
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     
     # HACEMOS LOS OBJETOS
-    persona = Persona()
+    persona = Persona(0.2, 0.3)
+    persona2 = Persona(-0.4,-0.5)
 
     t0 = 0
     #controlador.setSerpiente(serpiente)
@@ -65,6 +66,7 @@ def Simulador():
         
         glUseProgram(pipeline.shaderProgram)
         persona.draw(pipeline)
+        persona2.draw(pipeline)
         #borde.draw(pipeline)
         #serpiente.comerManzana()
         #manzana.draw(pipeline)
