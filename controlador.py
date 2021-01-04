@@ -27,6 +27,12 @@ class Controlador(object):
             grafico.graficar(self.modelacion.getEstadisticas())
             print("P")
 
+        elif (key == glfw.KEY_R) and action == glfw.PRESS:
+            self.modelacion.nuevoContagio()
+            
+        elif (key == glfw.KEY_E) and action == glfw.PRESS:
+            self.modelacion.perdidaInmunidad()
+
         elif (key == glfw.KEY_RIGHT) and action == glfw.PRESS:
             self.modelacion.iteracion()
             print("Dia " + str(self.dia))

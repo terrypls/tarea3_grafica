@@ -69,6 +69,28 @@ class Poblacion(object):
         else:
             self.estadisticas.append([enfermos, vivos, muertos])
 
+    def nuevoContagio(self):
+        contador = 0
+        for ind in self.poblacion:
+            if ind.isVivo() and not ind.isContagiado() and not ind.isRecuperado():
+                ind.setContagiado()
+                contador += 1
+            if contador == 3:
+                print("se contagio a 3 personas al azar")
+                break
+        if contador!=3:
+            print("Todos eran inmunes :O")   
+
+    def perdidaInmunidad(self):
+        dias = random.randint(1, 5)
+        modulo = random.randint(2, 6)
+        contador = 0
+        for i in range(len(self.poblacion)):
+            if i % modulo == 0 and self.poblacion[i].isRecuperado():
+                self.poblacion[i].perdidaInmunidad(dias)
+                contador+=1
+        print("Personas no inmunes =" +str(contador))
+                
     def iteracion(self):
         self.cadenaDeContagios()
         self.recuperados()

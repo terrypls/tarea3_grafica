@@ -27,6 +27,11 @@ class Individuo(object):
 
     def setRecuperado(self):
         self.recuperado = True
+    
+    def perdidaInmunidad(self, dias_enfermo):
+        self.recuperado = False
+        self.contagiado = False
+        self.dias_recuperacion = dias_enfermo
 
     def muerto(self):
         self.vivo = False
